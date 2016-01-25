@@ -13,6 +13,8 @@ npm install --save better-switch
 Pass an object of cases as first argument. The `default` part will be executed in case nothing else matches.
 
 ```JavaScript
+var betterSwitch = require('better-switch');
+
 var cases = {
   foo: function () {
     return 'bar';
