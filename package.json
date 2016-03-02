@@ -1,6 +1,6 @@
 {
   "name": "better-switch",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "More intuitive version of a Javascript switch statement.",
   "main": "better-switch.js",
   "keywords": [
