@@ -29,9 +29,11 @@ console.log(betterSwitch('foo', obj)); // => bar
 The associated value can be of any type. If it is a function it will be executed and the result returned. With ES2015 you can make it even clearer:
 
 ```JavaScript
-console.log(betterSwitch('baz', {
+const baz = 42,
+const val = betterSwitch('baz', {
   foo: () => 'bar',
-  baz: () => 21 * 2,
-  default: default
-})); // => 42
+  baz,
+  default: 'default'
+});
+console.log(value); // => 42
 ```
