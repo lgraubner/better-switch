@@ -10,21 +10,28 @@ The native Javascript switch statement doesn't really fit into the common coding
 npm install --save better-switch
 ```
 
-Pass an object of cases as first argument. The `default` part will be executed in case nothing else matches.
+Pass an object as first argument. The `default` part will be executed in case nothing else matches. If `default` is not specified and nothing matches it will return `undefined`.
 
 ```JavaScript
 var betterSwitch = require('better-switch');
 
-var cases = {
+var obj = {
   foo: function () {
     return 'bar';
   },
-  default: function () {
-    return 'default';
-  }
+  baz: 42,
+  default: 'default'
 };
 
-console.log(betterSwitch(cases, 'foo')); // => bar
+console.log(betterSwitch('foo', obj)); // => bar
 ```
 
-Optionally you can pass a context as third argument, to call functions in a specific context.
+The associated value can be of any type. If it is a function it will be executed and the result returned. With ES2015 you can make it even clearer:
+
+```JavaScript
+console.log(betterSwitch('baz', {
+  foo: () => 'bar',
+  baz: () => 21 * 2,
+  default: default
+})); // => 42
+```

@@ -3,15 +3,17 @@ var _ = {
   isFunction: require('lodash/isFunction'),
 };
 
-module.exports = function (cases, value, context) {
-  var func = cases[value];
-  var root = context || this;
-  if (!_.isUndefined(func)) {
-    if (!_.isFunction(func)) {
-      throw new Error('Callback is not a function!');
+module.exports = function (value, map) {
+  var action = map[value];
+
+  if (!_.isUndefined(action)) {
+    if (_.isFunction(action)) {
+      return map[value].call(this);
     }
-    return cases[value].call(root);
-  } else if (!_.isUndefined(cases.default)) {
-    return cases.default.call(root);
+    return map[value];
+  } else if (!_.isUndefined(map.default)) {
+    return map.default.call(this);
   }
+
+  return undefined;
 };
