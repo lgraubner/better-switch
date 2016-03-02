@@ -5,15 +5,18 @@ var _ = {
 
 module.exports = function (value, map) {
   var action = map[value];
+  var def = map.default;
 
-  if (!_.isUndefined(action)) {
-    if (_.isFunction(action)) {
-      return map[value].call(this);
-    }
-    return map[value];
-  } else if (!_.isUndefined(map.default)) {
-    return map.default.call(this);
+  if (_.isFunction(action)) {
+    return action.call(this);
   }
 
-  return undefined;
+  if (!_.isUndefined(action)) {
+    return action;
+  }
+
+  if (_.isFunction(def)) {
+    return def.call(this);
+  }
+  return def;
 };
