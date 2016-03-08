@@ -7,7 +7,7 @@ The native Javascript switch statement doesn't really fit into the common coding
 ## Usage
 
 ```Bash
-npm install --save better-switch
+npm install -S better-switch
 ```
 
 Pass an object as first argument. The `default` part will be executed in case nothing else matches. If `default` is not specified and nothing matches it will return `undefined`.
@@ -15,7 +15,7 @@ Pass an object as first argument. The `default` part will be executed in case no
 ```JavaScript
 var betterSwitch = require('better-switch');
 
-var obj = {
+var map = {
   foo: function () {
     return 'bar';
   },
@@ -23,17 +23,29 @@ var obj = {
   default: 'default'
 };
 
-console.log(betterSwitch('foo', obj)); // => bar
+var result = betterSwitch('foo', map); // => bar
 ```
 
 The associated value can be of any type. If it is a function it will be executed and the result returned. With ES2015 you can make it even clearer:
 
 ```JavaScript
 const baz = 42,
-const val = betterSwitch('baz', {
+const map = {
   foo: () => 'bar',
   baz,
   default: 'default'
-});
-console.log(value); // => 42
+};
+const result = betterSwitch('baz', map); // => 42
+```
+
+If you want to return a function you have to wrap it in a function. This is required, because otherwise the function will be executed.
+
+```JavaScript
+const map = {
+  func: function() {
+    return function() {
+      // do stuff
+    }
+  }
+}
 ```

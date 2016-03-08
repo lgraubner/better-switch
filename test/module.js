@@ -50,4 +50,20 @@ describe('Module', function () {
     });
     expect(result).to.be.undefined;
   });
+
+  it('should throw an error if the first argument type is wrong', function () {
+    function proxy() {
+      betterSwitch(42, {});
+    }
+
+    expect(proxy).to.throw(TypeError);
+  });
+
+  it('should throw an error if the second argument type is wrong', function () {
+    function proxy() {
+      betterSwitch('foo', 'bar');
+    }
+
+    expect(proxy).to.throw(TypeError);
+  });
 });
